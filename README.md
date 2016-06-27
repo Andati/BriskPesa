@@ -84,7 +84,7 @@ For support or enquiries please email support@mobiworld.co.ke or call +254 727 8
 
 ## License
 
-    Copyright 2016 Mobiworl ICT Solutions
+    Copyright 2016 Mobiworld ICT Solutions Ltd
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
