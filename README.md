@@ -10,7 +10,7 @@ BriskPesa facilitates android developers to integrate with M-Pesa seamlessly for
 ![BriskPesa](./screenshots/screenshot.png)
 ![BriskPesa](./screenshots/screenshot2.png)
 
-Try out the sample application on [Google Play][6].
+Try out the sample application on [Google Play](https://play.google.com/store/apps/details?id=com.briskpesa.briskpesademo).
 
 <a href="https://play.google.com/store/apps/details?id=com.briskpesa.briskpesademo">
   <img alt="BriskPesaDemo on Google Play"
@@ -40,8 +40,10 @@ In the xml :
 You can set phone and amount properties. Setting phone or amount means users will not be asked to enter these details.
 
 ```
+	...
 	briskpesa:phone="07xx"
 	briskpesa:amount="10"
+	...
 ```
 
 
@@ -78,6 +80,7 @@ Ensure to wrap your code in a try catch code block:
   	}
 ```
 
+For support or enquiries please email support@mobiworld.co.ke or call +254 727 893 663.
 
 ## License
 
