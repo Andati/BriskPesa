@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">BriskPesa Demo</string>
+
+    <string name="phone_number">Please enter your phone number below.</string>
+    <string name="phone_hint">Phone Number e.g. 07xx</string>
+    <string name="savebtn">OK</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string name="about_txt">BriskPesa facilitates android developers to integrate with M-Pesa seamlessly for in-app payments.\n\n
+        Users do not need to leave the application to make M-Pesa payments.\n\n
+        Would you like to have this feature in your android app? Contact us: +254727893663 | info@mobiworld.co.ke | www.briskpesa.com</string>
+
+    <string name="help_txt">To complete a transaction, you will enter your Service PIN on the USSD pop up shown on clicking pay button.
+        If you don\'t have one dial *126*5# for instructions.\n\n
+        For more information visit http://www.safaricom.co.ke/personal/get-more/bonga-points/my-bonga-pin</string>
+</resources>

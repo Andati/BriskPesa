@@ -1,0 +1,90 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin">
+    <TextView
+        android:id="@+id/hiddenTxt"
+        android:layout_height="fill_parent"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:text="This is hidden text to ensure that the window is fullscreen."
+        android:textSize="12sp"
+        android:visibility="invisible"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+    <TextView
+        android:id="@+id/txt_title"
+        android:layout_height="fill_parent"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="4dp"
+        android:text="Example Title"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+    <TextView
+        android:id="@+id/txt_message"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="4dp"
+        android:text="Dynamic text will be shown here."
+        android:textSize="20dp"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+    <LinearLayout
+        android:id="@+id/cancelsend_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp"
+        android:weightSum="3">
+        <Button
+            android:id="@+id/cancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:text="Cancel"
+            android:textSize="20sp"
+            android:background="@drawable/button"
+            android:layout_weight="1"
+            android:gravity="center"
+            style="@style/button_style"
+            />
+        <Button
+            android:id="@+id/edit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:text="Edit"
+            android:textSize="20sp"
+            android:background="@drawable/button"
+            android:layout_weight="1"
+            android:gravity="center"
+            style="@style/button_style"
+            />
+        <Button
+            android:id="@+id/yes"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:text="Yes"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:background="@drawable/button"
+            android:layout_weight="1"
+            style="@style/button_style"
+            />
+    </LinearLayout>
+
+</LinearLayout>

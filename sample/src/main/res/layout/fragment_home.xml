@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:briskpesa="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+     <com.mobiworld.briskpesa.BriskPesaView
+         android:id="@+id/briskpesa"
+         android:layout_width="match_parent"
+         android:layout_gravity="center"
+         android:layout_height="wrap_content"
+         android:layout_marginTop="0dp"
+         briskpesa:apiKey="490cc963938029b5510bbf9932d1650ef80a86096b00ae8a0e9b84e6154b64b4" />
+
+</LinearLayout>
