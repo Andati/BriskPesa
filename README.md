@@ -1,13 +1,21 @@
 # BriskPesa
 
-BriskPesa Library Demo - API 8 and above
+[![API](https://img.shields.io/badge/API-8%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=8)
 
 This is a sample application that shows how to integrate BriskPesa library with your android application.
 
 BriskPesa facilitates android developers to integrate with M-Pesa seamlessly for in-app payments. Users do not need to leave the application to make M-Pesa payments.
 
-## Screenshot
+## Screenshots
 ![BriskPesa](./screenshots/screenshot.png)
+![BriskPesa](./screenshots/screenshot2.png)
+
+Try out the sample application on [Google Play][6].
+
+<a href="https://play.google.com/store/apps/details?id=com.briskpesa.briskpesademo">
+  <img alt="BriskPesaDemo on Google Play"
+         src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" width="140" />
+</a>
 
 ## Gradle Dependency
 Use this dependency in your build.gradle file to reference BriskPesa library in your project
@@ -29,7 +37,7 @@ In the xml :
          android:layout_marginTop="0dp"
          briskpesa:apiKey="YourBriskPesaGatewayKey" />
 ```
-You can set phone and amount properties. Setting phone or amount means users will not be asked to enter those details.
+You can set phone and amount properties. Setting phone or amount means users will not be asked to enter these details.
 
 ```
 	briskpesa:phone="07xx"
