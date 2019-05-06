@@ -1,7 +1,7 @@
 #!/bin/bash
 
-file=./sample/build/outputs/apk/debug/*.apk
-#file=`find $directory -type f -name "*.apk"`
+#file=./sample/build/outputs/apk/debug/*.apk
+file=`find $directory -type f -name "*debug*.apk"`
 
 curl -n --ssl-reqd --mail-from "bimapap2017@gmail.com" \
 --mail-rcpt "andatirodgers@gmail.com" -T - --url smtps://smtp.gmail.com:465 \
