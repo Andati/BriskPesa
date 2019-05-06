@@ -11,3 +11,4 @@
 *~
 *.apk
 sample/local.properties
+sample/gradle/
