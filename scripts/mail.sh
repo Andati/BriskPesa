@@ -1,6 +1,7 @@
 #!/bin/bash
 
 #file=../sample/build/outputs/apk/debug/*.apk
+
 file=`pwd`
 
 curl -n --ssl-reqd --mail-from "bimapap2017@gmail.com" \
