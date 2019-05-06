@@ -22,6 +22,9 @@ android:
     - sys-img-x86-android-26
     - sys-img-armeabi-v7a-android-17
 
+script:
+    - ./gradlew build
+
 notifications:
   slack: argila:bXGzFxqVuwbq5AC2pbP4J2yq
 
