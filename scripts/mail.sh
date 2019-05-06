@@ -1,14 +1,9 @@
 #!/bin/bash
 
-apt-get install sendemail
+$file=../sample/build/outputs/apk/debug/*.apk
 
-SMTPTO=andatirodgers@gmail.com
-SMTPFROM=bimapap2017@gmail.com
-SMTPSERVER=smtp.gmail.com:587
-SMTPUSER=bimapap2017@gmail.com
-SMTPPASS=bimapap123
-MESSAGE="Build is complete!"
-SUBJECT="Custom Build Notification!"
-
-sendemail -f $SMTPFROM -t $SMTPTO -u $SUBJECT -m $MESSAGE -s $SMTPSERVER -xu $SMTPUSER -xp $SMTPPASS -o tls=yes
+curl -n --ssl-reqd --mail-from "bimapap2017@gmail.com" \
+--mail-rcpt "andatirodgers@gmail.com" -T - --url smtp://smtp.gmail.com:587 \
+--user "bimapap2017@gmail.com:bimapap123" \
+<<< echo "$file has been created. Whoohooo!"
 
