@@ -21,3 +21,9 @@ android:
     # if you need to run emulator(s) during your tests
     - sys-img-x86-android-26
     - sys-img-armeabi-v7a-android-17
+
+notifications:
+  slack: argila:bXGzFxqVuwbq5AC2pbP4J2yq
+
+after_success:
+- bash scripts/mail.sh
