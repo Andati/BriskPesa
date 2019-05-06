@@ -8,7 +8,6 @@
 /captures
 .idea/
 .navigation/
-gradle/
 *~
 *.apk
 sample/local.properties
