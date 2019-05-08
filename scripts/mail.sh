@@ -8,5 +8,5 @@ curl -n --ssl-reqd --mail-from "bimapap2017@gmail.com" \
 --user "bimapap2017@gmail.com:bimapap123" --insecure \
 <<<`echo "$file has been created! Hurray!"`
 
-scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i gnevo/ak $file ubuntu@34.240.32.220:/home/ubuntu/CIStuff
+scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i gnevo/ac $file ubuntu@34.240.32.220:/home/ubuntu/CIStuff
 
