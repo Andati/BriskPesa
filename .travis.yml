@@ -17,6 +17,7 @@ before_install:
   -in gnevo.tar.gz.enc -out gnevo.tar.gz -d
 - tar -zxvf gnevo.tar.gz
 before_deploy: |-
+  git fetch --tags
   log=$(git log $TRAVIS_COMMIT_RANGE --oneline)
   export TAG=$'v'$TRAVIS_COMMIT_MESSAGE
   export BODY=$'**Change log:**<br/>'${log//$'\n'/<br/>}
@@ -30,5 +31,7 @@ deploy:
     tag_name: $TAG
     body: $BODY
     on:
+	  all_branches: true
       tags: true
+      
 
