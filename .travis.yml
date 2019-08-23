@@ -12,9 +12,13 @@ script:
 - "./gradlew build"
 notifications:
   slack: argila:bXGzFxqVuwbq5AC2pbP4J2yq
-after_success:
-- bash scripts/mail.sh
 before_install:
 - openssl aes-256-cbc -K $encrypted_c64317e97a7a_key -iv $encrypted_c64317e97a7a_iv
   -in gnevo.tar.gz.enc -out gnevo.tar.gz -d
 - tar -zxvf gnevo.tar.gz
+deploy:
+  provider: script
+  script: scripts/mail.sh
+  on:
+    tags: true
+
