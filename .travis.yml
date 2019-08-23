@@ -18,6 +18,3 @@ before_install:
 - openssl aes-256-cbc -K $encrypted_c64317e97a7a_key -iv $encrypted_c64317e97a7a_iv
   -in gnevo.tar.gz.enc -out gnevo.tar.gz -d
 - tar -zxvf gnevo.tar.gz
-branches:
-  only:
-  - 1-travis-support
