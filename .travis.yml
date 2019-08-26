@@ -1,38 +1,38 @@
+android: 
+  components: 
+    - build-tools-28.0.3
+    - android-28
+    - extra-google-google_play_services
+    - extra-google-m2repository
+    - extra-android-m2repository
+    - sys-img-x86-android-26
+    - sys-img-armeabi-v7a-android-17
 language: android
-android:
-  components:
-  - build-tools-28.0.3
-  - android-28
-  - extra-google-google_play_services
-  - extra-google-m2repository
-  - extra-android-m2repository
-  - sys-img-x86-android-26
-  - sys-img-armeabi-v7a-android-17
-script:
+notifications: 
+  slack: "argila:bXGzFxqVuwbq5AC2pbP4J2yq"
+script: 
   - "./gradlew build"
-notifications:
-  slack: argila:bXGzFxqVuwbq5AC2pbP4J2yq
-before_install:
-  - openssl aes-256-cbc -K $encrypted_c64317e97a7a_key -iv $encrypted_c64317e97a7a_iv
-  - in gnevo.tar.gz.enc -out gnevo.tar.gz -d
-  - tar -zxvf gnevo.tar.gz
-before_deploy:
-  - git fetch --tags
-  - log=$(git log $TRAVIS_COMMIT_RANGE --oneline)
-  - export TAG=$'v'$TRAVIS_COMMIT_MESSAGE
-  - export BODY=$'**Change log:**<br/>'${log//$'\n'/<br/>}
-deploy:
+before_deploy: 
+  - "git fetch --tags"
+  - "log=$(git log $TRAVIS_COMMIT_RANGE --oneline)"
+  - "export TAG=$'v'$TRAVIS_COMMIT_MESSAGE"
+  - "export BODY=$'**Change log:**<br/>'${log//$'\\n'/<br/>}"
+before_install: 
+  - "openssl aes-256-cbc -K $encrypted_c64317e97a7a_key -iv $encrypted_c64317e97a7a_iv"
+  - "in gnevo.tar.gz.enc -out gnevo.tar.gz -d"
+  - "tar -zxvf gnevo.tar.gz"
+deploy: 
   - provider: releases
-    skip_cleanup: true
-    api_key:
+    api_key: 
       secure: TZVw75NsfqF9MYBzyBvV1Inx1EXQWZcBuyQzczLXueuZprIHlXo9jJ6gdxO5GaJC5KABbQiXP1fcDieS/CEvYEVfjqy4191gdcBhQ54/cGyF/qJX4e52FwU+5ufqSegv3MY1tmACwlEFFbRXwZ9aR/uaPa9hMGTC0QsxdNpAf4m5HHkp3HGoA24m+Dj1uoH5woNhNQPIC33KS1QkYxTWYm+RzjHzkF7E4hLETVECfX2/vhL8KMLUi+b8aRzHunDOXzi09BMR3SnODHYb8pjrVwOxazDMHMKyWzKdt19CSnV94+SqRuti+NYqrBaWb3YYR+I3PLHkNgdhJUhh4ucAzE/qhMnlwIjKsOYki6BNl4j2KMPzJsmo8IkdIoq5VQY9naAx83gMa7VUqWae6lSvHeNyTLyt3/GnDcnu3j00l0LqV/O8IwyHln4BFNOyd794NeiocrIvDNJPYNg9n5BsiEOaaleS7slF8x/KoJVoi4+ymuxrISGfylLUwfsh5T8b/HnR2VNMuryHrb5xOMmongvEORySfl/gpNHihW060IdgmwdI7WYKKI2nXpKLgxWSUppVOP7JxeRUw7TIHHbQ95gXZmg9Qvckf4wITmk1fJd2wV6pO4xK82Jqh42BC5Uc+DWFl90hpZAm6tHv6BE0O4tY7ZzdBxiwP30cCQrZYa4=
-    file: README.md
-    name: Release $TRAVIS_COMMIT_MESSAGE
-    tag_name: $TAG
     body: $BODY
-    on:
-	  repo: Andati/BriskPesa
+    file: README.md
+    name: "Release $TRAVIS_COMMIT_MESSAGE"
+    skip_cleanup: true
+    tag_name: $TAG
+    true: 
       all_branches: true
-	  condition: $TRAVIS_COMMIT_MESSAGE =~ ^([0-9]{1,3}).([0-9]{1,3}).([0-9]{1,3})$
-      
+      condition: "$TRAVIS_COMMIT_MESSAGE =~ ^([0-9]{1,3}).([0-9]{1,3}).([0-9]{1,3})$"
+      repo: Andati/BriskPesa
+
 
