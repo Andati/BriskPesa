@@ -1,5 +1,6 @@
 import requests
 import sys
+import json
 
 GraphQL_URL = "https://api.github.com/graphql"
 
@@ -7,7 +8,7 @@ if len(sys.argv) == 1:
 	print "pass your GitHub key to this script"
 	exit(0)
 
-headers = {"Authorization": "Bearer " + sys.argv[1]}
+headers = {"Authorization": "Bearer " + sys.argv[1], 'content-type': 'application/json'}
 
 query = """
 {
@@ -27,7 +28,7 @@ query = """
 }
 """
 
-response = requests.post(GraphQL_URL, json={'query':query}, headers=headers)
+response = requests.post(GraphQL_URL, data=json.dumps({'query':query}), headers=headers)
 if response.status_code == 200:
 	json_response = response.json()
 	#print json_response['data']
