@@ -8,7 +8,7 @@ if len(sys.argv) == 1:
 	print "pass your GitHub key to this script"
 	exit(0)
 
-headers = {"Authorization": "Bearer " + sys.argv[1], 'content-type': 'application/json'}
+headers = {"Authorization": "Bearer " + sys.argv[1], "content-type": "application/json"}
 
 query = """
 {
