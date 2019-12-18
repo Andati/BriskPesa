@@ -28,14 +28,23 @@ query = """
 }
 """
 
+def cleanBodyText(body):
+	res = "";
+	for i in range(len(body)):
+	  if(body[i]=='\n'):
+		if len(res)>1 and res[len(res)-1] != '\n':
+		  res += body[i]
+	  else:
+		res += body[i]
+	return res
+
 response = requests.post(GraphQL_URL, data=json.dumps({'query':query}), headers=headers)
 if response.status_code == 200:
 	json_response = response.json()
-	#print json_response['data']
 	edges = json_response['data']['search']['edges']
 	for edge in edges:
-		#print edge['node']['title']
-		print edge['node']['bodyText']
+		print cleanBodyText(edge['node']['bodyText'])
 else:
 	print "Error code returned " + str(response.status_code)
+
 
