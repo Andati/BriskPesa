@@ -12,11 +12,11 @@ notifications:
   slack: argila:bXGzFxqVuwbq5AC2pbP4J2yq
 script:
 - "./gradlew build"
-- log=`python cicd.py GITHUB_API_KEY`
+- log=`python scripts/cicd.py GITHUB_API_KEY`
 - echo $'**Change log:**<br/>'${log//$'\n'/<br/>}
 before_deploy:
 - git fetch --tags
-- log=`python cicd.py GITHUB_API_KEY`
+- log=`python scripts/cicd.py GITHUB_API_KEY`
 - export BODY=$'**Change log:**<br/>'${log//$'\n'/<br/>}
 deploy:
 - provider: releases
