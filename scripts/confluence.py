@@ -4,8 +4,8 @@ import sys
 from requests.auth import HTTPBasicAuth
 from datetime import datetime
 
-if len(sys.argv) < 4:
-	print("Usage: python %s ATLASSIAN_EMAIL ATLASSIAN_TOKEN GITHUB_API_KEY" % sys.argv[0])
+if len(sys.argv) < 5:
+	print("Usage: python %s ATLASSIAN_EMAIL ATLASSIAN_TOKEN GITHUB_API_KEY REPO_SLUG" % sys.argv[0])
 	exit(0)
 
 BASE_URL = "https://smartregister.atlassian.net/wiki/rest/api/content"
@@ -13,6 +13,9 @@ GraphQL_URL = "https://api.github.com/graphql"
 ATLASSIAN_EMAIL = sys.argv[1]
 ATLASSIAN_TOKEN = sys.argv[2]
 GITHUB_API_KEY = sys.argv[3]
+
+REPO_SLUG = sys.argv[4]
+(OWNER_NAME, REPO_NAME) = REPO_SLUG.split("/")
 
 BASIC_AUTH = HTTPBasicAuth(ATLASSIAN_EMAIL, ATLASSIAN_TOKEN)
 
@@ -83,7 +86,7 @@ def get_release_details():
 	headers = {"Authorization": "Bearer " + GITHUB_API_KEY, "content-type": "application/json"}
 	query = """
 	{
-	  repository(owner: "Andati", name: "BriskPesa") {
+	  repository(owner: "%s", name: "%s") {
 		releases(last: 1) {
 		  edges{
 		    node{
@@ -100,10 +103,14 @@ def get_release_details():
 		}
 	  }
 	}
-	"""
+	""" % (OWNER_NAME, REPO_NAME)
+	
 	response = requests.post(GraphQL_URL, data=json.dumps({'query':query}), headers=headers)
 	if response.status_code == 200:
 		json_response = response.json()
+		if json_response['data']['repository'] == None:
+			print "Exception encountered: " + response.text
+			return None
 		tag_name = json_response['data']['repository']['releases']['edges'][0]['node']['tagName']
 		published_at = json_response['data']['repository']['releases']['edges'][0]['node']['publishedAt']
 		description = json_response['data']['repository']['releases']['edges'][0]['node']['description']
@@ -122,6 +129,8 @@ current_content = get_page_json("1245380625", "body.storage")
 #print current_content
 
 release_details = get_release_details()
+if release_details == None:
+	exit(0)
 #print release_details
 
 published_at = datetime.strptime(release_details["published_at"], "%Y-%m-%dT%H:%M:%SZ")
