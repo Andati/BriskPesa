@@ -16,7 +16,6 @@ script:
 - echo ${log//$'\n'/<br/>}
 - python --version
 before_deploy:
-- git fetch --tags
 - log=`python scripts/cicd.py $GITHUB_API_KEY`
 - export BODY=${log//$'\n'/<br/>}
 deploy:

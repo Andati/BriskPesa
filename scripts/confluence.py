@@ -2,7 +2,7 @@ import json
 import requests
 import sys
 from requests.auth import HTTPBasicAuth
-import dateutil.parser
+from datetime import datetime
 
 if len(sys.argv) < 4:
 	print("Usage: python %s ATLASSIAN_EMAIL ATLASSIAN_TOKEN GITHUB_API_KEY" % sys.argv[0])
@@ -124,7 +124,8 @@ current_content = get_page_json("1245380625", "body.storage")
 release_details = get_release_details()
 #print release_details
 
-published_at = dateutil.parser.parse(release_details["published_at"])
+published_at = datetime.strptime(release_details["published_at"], "%Y-%m-%dT%H:%M:%SZ")
+
 new_html = '<tr><td><p><a href="'+ release_details["download_url"] +'">'+ release_details["tag_name"] +'</a></p></td><td><p>'+ custom_strftime('%b {S}, %Y', published_at) +'</p></td><td><p>'+ release_details["description"] +'</p></td></tr>'
 print new_html
 
