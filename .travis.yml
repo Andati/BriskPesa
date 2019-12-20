@@ -13,7 +13,8 @@ notifications:
 script:
 - "./gradlew build"
 - log=`python scripts/cicd.py $GITHUB_API_KEY`
-- echo $'**Change log:**<br/>'${log//$'\n'/<br/>}
+- echo ${log//$'\n'/<br/>}
+- python --version
 before_deploy:
 - git fetch --tags
 - log=`python scripts/cicd.py $GITHUB_API_KEY`
