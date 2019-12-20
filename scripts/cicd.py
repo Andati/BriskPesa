@@ -5,10 +5,11 @@ import json
 GraphQL_URL = "https://api.github.com/graphql"
 
 if len(sys.argv) == 1:
-	print "pass your GitHub key to this script"
+	print("Usage: python %s GITHUB_API_KEY" % sys.argv[0])
 	exit(0)
 
-headers = {"Authorization": "Bearer " + sys.argv[1], "content-type": "application/json"}
+GITHUB_API_KEY = sys.argv[1]
+headers = {"Authorization": "Bearer " + GITHUB_API_KEY, "content-type": "application/json"}
 
 query = """
 {
