@@ -11,13 +11,20 @@ android {
         versionCode 1
         versionName "1.0"
     }
+
     buildTypes {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
+
+    signingConfigs {
+        release
+    }
 }
+
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -25,4 +32,15 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation 'com.android.support:design:28.0.0'
     implementation 'com.mobiworld.briskpesa:briskpesa:1.0'
+}
+
+
+def isRunningOnTravis = System.getenv("CI") == "true"
+
+if (isRunningOnTravis) {
+    // configure keystore
+    signingConfigs.release.storeFile = file("../brisk_pesa.keystore")
+    signingConfigs.release.storePassword = System.getenv("keystore_password")
+    signingConfigs.release.keyAlias = System.getenv("keystore_alias")
+    signingConfigs.release.keyPassword = System.getenv("keystore_alias_password")
 }
