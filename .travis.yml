@@ -33,4 +33,4 @@ deploy:
     repo: Andati/BriskPesa
 before_install:
 - openssl aes-256-cbc -K $encrypted_e13ea250e513_key -iv $encrypted_e13ea250e513_iv
-  -in brisk_pesa.keystore.enc -out ~\/Downloads/brisk_pesa.keystore -d
+  -in brisk_pesa.keystore.enc -out brisk_pesa.keystore -d
