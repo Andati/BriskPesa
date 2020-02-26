@@ -29,6 +29,7 @@ before_deploy:
 - export TAG=$'v'$TRAVIS_COMMIT_MESSAGE
 - log=`python scripts/cicd.py $GITHUB_API_KEY $TRAVIS_REPO_SLUG`
 - export BODY=${log//$'\n'/<br/>}
+- echo `tree sample/build/outputs/apk`
 
 deploy:
 - provider: releases
