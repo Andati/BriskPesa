@@ -7,20 +7,29 @@ android:
   - extra-android-m2repository
   - sys-img-x86-android-26
   - sys-img-armeabi-v7a-android-17
+
 language: android
+
 notifications:
   slack: argila:bXGzFxqVuwbq5AC2pbP4J2yq
+
 script:
 - "./gradlew build"
 - echo $TRAVIS_COMMIT_MESSAGE
 - log=$(git log $TRAVIS_COMMIT_RANGE --oneline)
 - echo $'**Change log:**<br/>'${log//$'\n'/<br/>}
+- log=`python scripts/cicd.py $GITHUB_API_KEY $TRAVIS_REPO_SLUG`
+- echo ${log//$'\n'/<br/>}
+- python --version
+
 before_deploy:
 - git fetch --tags
 - echo $TRAVIS_COMMIT_MESSAGE
 - log=$(git log $TRAVIS_COMMIT_RANGE --oneline)
 - export TAG=$'v'$TRAVIS_COMMIT_MESSAGE
-- export BODY=$'**Change log:**<br/>'${log//$'\n'/<br/>}
+- log=`python scripts/cicd.py $GITHUB_API_KEY $TRAVIS_REPO_SLUG`
+- export BODY=${log//$'\n'/<br/>}
+
 deploy:
 - provider: releases
   api_key:
@@ -31,6 +40,15 @@ deploy:
   on:
     tags: true
     repo: Andati/BriskPesa
+
+after_deploy:
+- python scripts/confluence.py $ATLASSIAN_EMAIL $ATLASSIAN_TOKEN $GITHUB_API_KEY $TRAVIS_REPO_SLUG
+env:
+  global:
+  - secure: 1s70r8zZNAsAHI7fctsEdBTWAAvmiDtvK2tThC+2RBxEJnKZqSFzDkLC1LvM1tX8ufN/dD0y6oBdKhOkxlFaiVci/ow+sUZbTx4PBP1/NsleMwk+muK732MQBiMFz4a7Tcwc6tY8OZYovBrPlcbEuZ/UJroinxMJucUOiPUTMmZbvK6XKBOm+8+jH4zIQjhOskJCE81SoZxaQwVpZ0Dur61nPxevLPlrw27Dz6pGON/leTegWa1LhTbD5Yn4t/tcHCxqgn5SEXjgUt+I4EK4+4WkKhn3hACtLo8q2N5BC8+fXdAoR2EbrCxyX4/zcfDpqwtzvkAzdv4Stfy7miCo29bWGDdufvFXxP/oNHS08HYU1Qkg8F2o3egAMvEbA397QSqC2WjFtgJ06UA/DC6JB5nC/slokaoGKllLq8YJfFP5979a6l8rHmk7uFwRNdSx9NqN0lqIu8ByqqmHhG3ju7Z4HSpxUxWdeK7rV4G04545Xp+u5oJc7MWM8wBTHG/8FaQgrE0/+qw3m8zbsmAT7zhJl0qbug4mF7MPx+om8ViFRH/mlneyOScKnioQt3vfWsxy4oheICxAH6a3LHB9R6RWaKn8VzrWuL5wKIYGk/zttX41fZ+YAIS4DUEQ04DG3FL2l0ztr20a4bYdcdXaZ+QxKSYDaW63oylB9Z957K0=
+  - secure: S2K63SyyYxAZZR5W1EiX8Sv5FcNjJwzOlIyOcOY2LGx1TR8IYj7aD0zV9PUcS0PLePJYTeQdRXhftx+C34Or1a66VFnVNUQSLEazDkQXIYG9agd727YIdOghq6othttNFGB9PQUgyE6AZ81jmUNT064B3bFm/lXxK4bfV4sHdO6ZUO09jByYXIZbEyxvtwoM9vJaH4rrQPJeBwfVxpsH7QLVfsb3pgN9yj4uqhleeOHaHHvNQVevZdxG9K82lNxEQnp1lkYYJymlLcnKwNBsFArHNqwtKHkAhQ7pneclt+uojXp0qKHi4A2pnBJwHPVA483QopJQxTb/mwPQSCpW/R4tZmgfa1IUJF/Zcc/MjlXIWsF7hr8ZFw90h6j7Wa61gf8OnT/kYNPtmYo6/n0wWwN0ZEVdUmFBcyBF6LRn1tMKyIbjNK5O7fx4G1KqP3senfuyvPoTqmBwq/FDQELKIUD/lSeT1He8Wq0mepuEW5G3xKj98KPHUlZTYhFt8J1Tbl/b+Gea/93btY8iAB1Fvg1mbYW1rOEkPU9rfNjMeY/jNDeaZhxoNn9oI5sCzQ61FEugqZaodoEbpooTPniyhWRc+JJmadJaErk99u2f3zEVywfcPEcGbIawZ9g4nyxCMhosxXdRrBCvv6T/u010AKycgaNw7ghR0iwkpPUKV1Q=
+  - secure: b6tts5l57ga98XglOGSaKtq7+sMVannkMXI4qZwXQJzslRL1GJ8Qrm3gk/iYcyHNFqmuWM53g/GyFm3NASRNKz9YyXSEfY22Smka34+2aePKkzlNG9R+I0BzNiAqStC0FP29ry6Nbkumpi2TmYpK90g9YTx+DLgqCQY4zoujIPMeZO1Kvy5H9BZhSCiyi7ncjkfYJcZ0MbKUwYLPR07F0Ql9zKmcHNNKJtXAryw+POVqk3jc8Oopj50ZpNZwHRyXY8afRON4gqwOzEq/z9m3DdcZC7sFUt5lv2F/G/YR8nIeL9G5OV9WMfI0HJbUbi4RjNpn7p6528GlxXrL/gXIVzfu5Am3Bg/W3rmvQY6x9PrkTb3Tb8nWwcOHlOtmzHbpqFmh2AmILW7whvWVOTS6UCaoWpwylFnlD/r9uSajrUX+nVuKDhgFJ904tpFBQ5mc+d9IpRrbKTLIxdgpVCMsyxGutWH+znxDMvFNi9h0K3ji07vKA7/r9RcyKMQwVz5nixwMAA7z7D2KZ0SVa/tanVdtfer3YuTm9TpkzDjJInybSOSpM7oVtkoetTKOTVdjNrV6+QKqKXryMpl2IS1Z+weHcNkTC2kuZrf4iaWcvk2GM/uFAeGmFtgj812olP8uAakqiKhylVaFV8uI1lDb2BjYftngZpmc7fVOTo9t7g0=
+
 before_install:
-- openssl aes-256-cbc -K $encrypted_e13ea250e513_key -iv $encrypted_e13ea250e513_iv
-  -in brisk_pesa.keystore.enc -out brisk_pesa.keystore -d
+  - openssl aes-256-cbc -K $encrypted_e13ea250e513_key -iv $encrypted_e13ea250e513_iv
+    -in brisk_pesa.keystore.enc -out brisk_pesa.keystore -d
