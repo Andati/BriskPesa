@@ -48,5 +48,4 @@ class SigningPlugin implements Plugin<Project> {
     }
 }
 
-// Apply the plugin
 apply plugin: SigningPlugin
