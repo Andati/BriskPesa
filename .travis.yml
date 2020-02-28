@@ -16,7 +16,7 @@ notifications:
 script:
 - "./gradlew build"
 - echo $TRAVIS_COMMIT_MESSAGE
-- log=$(git log $TRAVIS_COMMIT_RANGE --oneline)
+# - log=$(git log $TRAVIS_COMMIT_RANGE --oneline)
 - echo $'**Change log:**<br/>'${log//$'\n'/<br/>}
 - log=`python scripts/cicd.py $GITHUB_API_KEY $TRAVIS_REPO_SLUG`
 - echo ${log//$'\n'/<br/>}
