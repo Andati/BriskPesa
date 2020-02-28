@@ -32,7 +32,7 @@ query = """
 		}
 	  }
 	}
-	""" % (date_since, REPO_SLUG)
+	""" % (REPO_SLUG, date_since)
 
 def cleanBodyText(body):
 	res = "";

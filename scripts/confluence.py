@@ -131,9 +131,11 @@ current_content = get_page_json("1245380625", "body.storage")
 release_details = get_release_details()
 if release_details == None:
 	exit(0)
-#print release_details
 
 published_at = datetime.strptime(release_details["published_at"], "%Y-%m-%dT%H:%M:%SZ")
+
+if release_details["description"] == None:
+	release_details["description"] = ""
 
 new_html = '<tr><td><p><a href="'+ release_details["download_url"] +'">'+ release_details["tag_name"] +'</a></p></td><td><p>'+ custom_strftime('%b {S}, %Y', published_at) +'</p></td><td><p>'+ release_details["description"] +'</p></td></tr>'
 print new_html
