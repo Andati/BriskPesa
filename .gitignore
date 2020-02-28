@@ -12,3 +12,6 @@
 *.apk
 sample/local.properties
 sample/gradle/
+sample/release/
+
+*.keystore
