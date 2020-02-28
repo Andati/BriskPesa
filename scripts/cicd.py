@@ -1,8 +1,10 @@
 import requests
 import sys
 import json
+from datetime import datetime, timedelta
 
 GraphQL_URL = "https://api.github.com/graphql"
+PERIOD = 150 #days
 
 if len(sys.argv) < 3:
 	print("Usage: python %s GITHUB_API_KEY REPO_SLUG" % sys.argv[0])
@@ -12,9 +14,11 @@ GITHUB_API_KEY = sys.argv[1]
 REPO_SLUG = sys.argv[2]
 headers = {"Authorization": "Bearer " + GITHUB_API_KEY, "content-type": "application/json"}
 
+date_since = (datetime.today() - timedelta(days=PERIOD)).strftime("%Y-%m-%d")
+
 query = """
 	{
-	  search(query: "repo:%s is:pr is:merged merged:>2019-12-09", type: ISSUE, last: 100) {
+	  search(query: "repo:%s is:pr is:merged merged:>%s", type: ISSUE, last: 100) {
 		edges {
 		  node {
 		    ... on PullRequest {
@@ -28,7 +32,7 @@ query = """
 		}
 	  }
 	}
-	""" % REPO_SLUG
+	""" % (date_since, REPO_SLUG)
 
 def cleanBodyText(body):
 	res = "";
