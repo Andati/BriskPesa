@@ -12,10 +12,10 @@ notifications:
   slack: argila:bXGzFxqVuwbq5AC2pbP4J2yq
 script:
 - "./gradlew build"
-- python --version
-before_deploy:
 - log=`python scripts/cicd.py $GITHUB_API_KEY $TRAVIS_REPO_SLUG`
 - echo ${log//$'\n'/<br/>}
+- python --version
+before_deploy:
 - export BODY=${log//$'\n'/<br/>}
 deploy:
 - provider: releases
