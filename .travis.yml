@@ -12,17 +12,16 @@ notifications:
   slack: argila:bXGzFxqVuwbq5AC2pbP4J2yq
 script:
 - "./gradlew build"
-- log=`python scripts/cicd.py $GITHUB_API_KEY $TRAVIS_REPO_SLUG`
-- echo ${log//$'\n'/<br/>}
 - python --version
 before_deploy:
 - log=`python scripts/cicd.py $GITHUB_API_KEY $TRAVIS_REPO_SLUG`
+- echo ${log//$'\n'/<br/>}
 - export BODY=${log//$'\n'/<br/>}
 deploy:
 - provider: releases
   api_key:
     secure: TZVw75NsfqF9MYBzyBvV1Inx1EXQWZcBuyQzczLXueuZprIHlXo9jJ6gdxO5GaJC5KABbQiXP1fcDieS/CEvYEVfjqy4191gdcBhQ54/cGyF/qJX4e52FwU+5ufqSegv3MY1tmACwlEFFbRXwZ9aR/uaPa9hMGTC0QsxdNpAf4m5HHkp3HGoA24m+Dj1uoH5woNhNQPIC33KS1QkYxTWYm+RzjHzkF7E4hLETVECfX2/vhL8KMLUi+b8aRzHunDOXzi09BMR3SnODHYb8pjrVwOxazDMHMKyWzKdt19CSnV94+SqRuti+NYqrBaWb3YYR+I3PLHkNgdhJUhh4ucAzE/qhMnlwIjKsOYki6BNl4j2KMPzJsmo8IkdIoq5VQY9naAx83gMa7VUqWae6lSvHeNyTLyt3/GnDcnu3j00l0LqV/O8IwyHln4BFNOyd794NeiocrIvDNJPYNg9n5BsiEOaaleS7slF8x/KoJVoi4+ymuxrISGfylLUwfsh5T8b/HnR2VNMuryHrb5xOMmongvEORySfl/gpNHihW060IdgmwdI7WYKKI2nXpKLgxWSUppVOP7JxeRUw7TIHHbQ95gXZmg9Qvckf4wITmk1fJd2wV6pO4xK82Jqh42BC5Uc+DWFl90hpZAm6tHv6BE0O4tY7ZzdBxiwP30cCQrZYa4=
-  body: "$BODY"
+  body: $BODY
   file: sample/build/outputs/apk/debug/sample-debug.apk
   skip_cleanup: true
   on:
